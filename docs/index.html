@@ -9,6 +9,7 @@
   :root{
     --navy:#000E21; --navy-deep:#050D1A; --magenta:#BA3189; --magenta-deep:#80225F;
     --cool-grey:#8A95A5; --mid-grey:#C5CDD9; --paper:#F7F8FA; --white:#FFFFFF; --ink-detail:#4A5566;
+    --muted:#5f6a7b; /* AA-passing muted label text on light; flips lighter in dark */
     --font:'Neue Haas Grotesk Display','Helvetica Neue',Helvetica,Arial,sans-serif;
     --mono:'SF Mono',ui-monospace,'JetBrains Mono',Menlo,Consolas,monospace;
     --maxw:920px;
@@ -36,11 +37,18 @@
   .btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.35);}
   .btn-ghost:hover{border-color:#fff;}
   a.btn{border-bottom:1px solid transparent;}
+  .btn{font-family:var(--font);line-height:1.2;}
+  .cta-hint{font-size:13px;color:var(--mid-grey);margin:14px 0 0;max-width:48ch;}
+  /* interaction + a11y fixes */
+  section,[id]{scroll-margin-top:64px;}
+  .tabbtn:hover{color:var(--navy);}
+  :focus-visible{outline:2px solid var(--magenta);outline-offset:2px;border-radius:2px;}
+  @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto;}}
 
   /* sections */
   section{padding:52px 0;border-top:1px solid var(--mid-grey);}
   section:first-of-type{border-top:none;}
-  .eyebrow{font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--cool-grey);margin:0 0 10px;}
+  .eyebrow{font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin:0 0 10px;}
   h2{font-size:27px;margin:0 0 8px;}
   h3{font-size:18px;margin:26px 0 8px;}
   p{margin:0 0 14px;}
@@ -48,7 +56,7 @@
 
   /* cards / grid */
   .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px;}
-  @media(max-width:680px){.grid{grid-template-columns:1fr;}}
+  @media(max-width:680px){.grid{grid-template-columns:1fr;} .copybtn{min-height:40px;} nav.quick .wrap{padding:10px 20px;} nav.quick a{padding:6px 0;}}
   .card{background:#fff;border:1px solid var(--mid-grey);border-radius:4px;padding:20px 22px;}
   .card h3{margin-top:0;}
   .card p{font-size:14.5px;color:var(--ink-detail);margin-bottom:0;}
@@ -56,7 +64,7 @@
   /* skills table */
   table{width:100%;border-collapse:collapse;margin-top:20px;font-size:14.5px;}
   th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--mid-grey);vertical-align:top;}
-  th{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--cool-grey);font-weight:600;}
+  th{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600;}
   td code{white-space:nowrap;}
   .chip{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.1em;border:1px solid var(--navy);border-radius:2px;padding:2px 6px;color:var(--navy);}
   .chip.ri{border-color:var(--magenta);color:var(--magenta);}
@@ -64,7 +72,7 @@
   /* tabs */
   .tabs{margin-top:24px;}
   .tabbar{display:flex;gap:6px;flex-wrap:wrap;border-bottom:1px solid var(--mid-grey);}
-  .tabbtn{appearance:none;background:transparent;border:none;font-family:var(--font);font-size:14px;font-weight:500;color:var(--cool-grey);padding:10px 14px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;}
+  .tabbtn{appearance:none;background:transparent;border:none;font-family:var(--font);font-size:14px;font-weight:500;color:var(--muted);padding:10px 14px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;}
   .tabbtn[aria-selected="true"]{color:var(--navy);border-bottom-color:var(--magenta);}
   .tabpanel{display:none;padding-top:22px;}
   .tabpanel[data-active="true"]{display:block;}
@@ -72,7 +80,7 @@
   ol.steps li{position:relative;padding:0 0 16px 42px;counter-increment:s;}
   ol.steps li::before{content:counter(s,decimal-leading-zero);position:absolute;left:0;top:0;font-family:var(--mono);font-size:12px;color:var(--magenta);border:1px solid var(--mid-grey);border-radius:3px;width:28px;height:24px;display:flex;align-items:center;justify-content:center;background:#fff;}
   ol.steps li p{margin:0;font-size:15px;}
-  ol.steps li .hint{font-size:13px;color:var(--cool-grey);margin-top:3px;}
+  ol.steps li .hint{font-size:13px;color:var(--muted);margin-top:3px;}
   pre{background:var(--navy);color:#e9edf3;border-radius:5px;padding:15px 17px;overflow-x:auto;font-family:var(--mono);font-size:13px;line-height:1.6;margin:12px 0;}
   pre code{background:none;border:none;padding:0;color:inherit;font-size:inherit;}
   .note{background:#fff;border:1px solid var(--mid-grey);border-left:3px solid var(--magenta);border-radius:3px;padding:13px 16px;font-size:14px;color:var(--ink-detail);margin:16px 0;}
@@ -101,7 +109,7 @@
   .pv-stamp{display:inline-block;margin-top:10px;font-size:9px;letter-spacing:.22em;text-transform:uppercase;border:1px solid rgba(255,255,255,.35);border-radius:3px;padding:3px 10px;}
   .pv-body{padding:20px 24px;}
   .pv-summary{background:#fff;border:1px solid var(--mid-grey);border-radius:3px;padding:12px 15px;font-size:15px;font-weight:500;}
-  .pv-sec{font-size:10px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--cool-grey);margin:18px 0 9px;}
+  .pv-sec{font-size:10px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin:18px 0 9px;}
   .pv-sec.risk{color:var(--magenta);}
   .pv-item{border:1px solid var(--mid-grey);border-radius:3px;padding:10px 13px;margin-bottom:8px;display:flex;align-items:center;gap:9px;font-size:14px;}
 
@@ -112,19 +120,29 @@
   /* toc / quick nav */
   nav.quick{position:sticky;top:0;background:rgba(247,248,250,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--mid-grey);z-index:10;}
   nav.quick .wrap{display:flex;gap:18px;overflow-x:auto;padding:12px 24px;font-size:13px;}
-  nav.quick a{border:none;color:var(--cool-grey);white-space:nowrap;font-weight:500;}
+  nav.quick a{border:none;color:var(--muted);white-space:nowrap;font-weight:500;}
   nav.quick a:hover{color:var(--navy);}
 
   @media (prefers-color-scheme: dark){
-    body{background:#0a1220;color:#e9edf3;}
+    body{background:#0a1220;color:#e9edf3;--muted:#9aa6b8;}
     section{border-color:#1e2a3d;}
+    .note strong{color:#e9edf3;}
+    .chip.ri, .pv-sec.risk{color:#e77cbf;}
     .card,.dl,.repo,.note,.preview,.pv-summary,.pv-item{background:#0f1a2c;border-color:#26344a;color:#e9edf3;}
     .card p,.dl p,.note,.sub,td{color:#aeb9ca;}
     code{background:#16233a;border-color:#26344a;color:#e9edf3;}
     th,td{border-color:#1e2a3d;}
     nav.quick{background:rgba(10,18,32,.92);border-color:#1e2a3d;}
+    nav.quick a{color:#9aa6b8;}
+    nav.quick a:hover{color:#f2f5f9;}
     a{color:#e9edf3;border-color:#33425b;}
     .chip{color:#cdd6e4;border-color:#33425b;}
+    .tabbtn{color:#9aa6b8;}
+    .tabbtn:hover{color:#f2f5f9;}
+    .tabbtn[aria-selected="true"]{color:#f2f5f9;}
+    .copybtn{border-color:#33425b;color:#e77cbf;}
+    .cta-hint{color:#9aa6b8;}
+    ol.steps li::before{background:#0f1a2c;border-color:#33425b;}
   }
 </style>
 </head>
@@ -140,13 +158,14 @@
       <path d="M50 50 L83.05 18 A46 46 0 1 1 50 4 Z" fill="url(#lf)"/>
       <circle cx="50" cy="50" r="8" fill="#BA3189"/>
     </svg>
-    <p class="wordmark">L O C U S</p>
+    <h1 class="wordmark">L O C U S</h1>
     <p class="tagline">Everything filed. Nothing forgotten.</p>
     <p class="lede">A private chief-of-staff workspace. It turns loose notes into a governed portfolio, every item typed, filed under an engagement, and kept.</p>
     <div class="cta">
       <a class="btn btn-primary" href="#install">Install</a>
-      <a class="btn btn-ghost" href="#downloads">Download artifacts</a>
+      <button type="button" class="btn btn-ghost" id="copy-install" data-copy-text="Add the plugin marketplace https://github.com/bradbogdan/locus-plugin and install the locus plugin, then help me set it up.">Copy install prompt</button>
     </div>
+    <p class="cta-hint">Paste the copied prompt into a Claude Cowork or Claude Code chat and the agent installs Locus for you.</p>
   </div>
 </header>
 
@@ -157,7 +176,6 @@
     <a href="#setup">Set up</a>
     <a href="#use">Use it</a>
     <a href="#app">App mode</a>
-    <a href="#downloads">Downloads</a>
     <a href="#uninstall">Uninstall</a>
     <a href="#know">Good to know</a>
   </div>
@@ -206,12 +224,12 @@
 
     <div class="tabs" data-tabs>
       <div class="tabbar" role="tablist">
-        <button class="tabbtn" role="tab" aria-selected="true" data-tab="ai">Claude AI</button>
-        <button class="tabbtn" role="tab" aria-selected="false" data-tab="cowork">Claude Cowork</button>
-        <button class="tabbtn" role="tab" aria-selected="false" data-tab="cli">Claude Code (CLI)</button>
+        <button class="tabbtn" role="tab" aria-selected="true" data-tab="ai" id="tab-ai" aria-controls="panel-ai">Claude AI</button>
+        <button class="tabbtn" role="tab" aria-selected="false" data-tab="cowork" id="tab-cowork" aria-controls="panel-cowork">Claude Cowork</button>
+        <button class="tabbtn" role="tab" aria-selected="false" data-tab="cli" id="tab-cli" aria-controls="panel-cli">Claude Code (CLI)</button>
       </div>
 
-      <div class="tabpanel" data-panel="ai" data-active="true">
+      <div class="tabpanel" data-panel="ai" data-active="true" id="panel-ai" role="tabpanel" aria-labelledby="tab-ai" tabindex="0">
         <ol class="steps">
           <li><p>Open the <strong>Directory</strong>, then the <strong>Plugins</strong> tab.</p></li>
           <li><p>Click <strong>+</strong> (top right) and choose <strong>Add from a repository</strong>.</p></li>
@@ -221,7 +239,7 @@
         <span class="avail"><span class="dot ok"></span> App mode available here (Claude AI renders the React artifact).</span>
       </div>
 
-      <div class="tabpanel" data-panel="cowork">
+      <div class="tabpanel" data-panel="cowork" id="panel-cowork" role="tabpanel" aria-labelledby="tab-cowork" tabindex="0">
         <ol class="steps">
           <li><p>Open the <strong>Directory</strong>, then the <strong>Plugins</strong> tab.</p></li>
           <li><p>Click <strong>+</strong> (top right) and choose <strong>Add from a repository</strong>.</p></li>
@@ -231,7 +249,7 @@
         <span class="avail"><span class="dot no"></span> Desk mode only. Cowork's artifact pane serves self-contained HTML, so App mode does not run here, use the file-based skills.</span>
       </div>
 
-      <div class="tabpanel" data-panel="cli">
+      <div class="tabpanel" data-panel="cli" id="panel-cli" role="tabpanel" aria-labelledby="tab-cli" tabindex="0">
         <p>From a terminal with the <code>claude</code> CLI:</p>
         <pre><code>claude plugin marketplace add bradbogdan/locus-plugin
 claude plugin install locus@locus</code></pre>
@@ -297,38 +315,9 @@ claude plugin install locus@locus</code></pre>
   <div class="wrap">
     <p class="eyebrow">App mode</p>
     <h2>Opening the board</h2>
-    <p class="sub">In Claude AI, say <code>open locus</code>, the plugin renders the bundled app as a React artifact using your configured role. Or paste the app yourself from the download below.</p>
+    <p class="sub">In Claude AI, say <code>open locus</code>, the plugin renders the bundled app as a React artifact using your configured role.</p>
     <div class="note">
       <strong>Runtime.</strong> App mode needs the Claude AI React artifact runtime (<code>window.storage</code> for state, an LLM route for the four intelligence sites). If the intelligence sites report <code>no AI route reachable</code>, your artifact environment does not expose an LLM route, use Desk mode instead. Claude Cowork's HTML-only pane cannot run App mode at all.
-    </div>
-    <div class="note">
-      <strong>Pasting it yourself.</strong> Download <code>locus-app.tsx</code>, replace the four <code>{{PRINCIPAL_ROLE}}</code> tokens with your role (for example "the CTO of a tech group"), and publish it as a React artifact.
-    </div>
-  </div>
-</section>
-
-<section id="downloads">
-  <div class="wrap">
-    <p class="eyebrow">Downloads</p>
-    <h2>Artifacts</h2>
-    <p class="sub">You do not need these to install the plugin, the marketplace carries everything. They are here for App mode and offline reference.</p>
-    <div class="grid">
-      <div class="dl">
-        <div class="icon">TSX</div>
-        <div>
-          <h3>locus-app.tsx</h3>
-          <p>The App-mode source. Paste into Claude AI as a React artifact (replace the role token). 1,498 lines, React only.</p>
-          <a class="btn btn-primary" href="./downloads/locus-app.tsx" download>Download</a>
-        </div>
-      </div>
-      <div class="dl">
-        <div class="icon">ZIP</div>
-        <div>
-          <h3>locus.plugin</h3>
-          <p>The packaged plugin (the five skills, references, and assets). For reference or an offline copy.</p>
-          <a class="btn btn-primary" href="./downloads/locus.plugin" download>Download</a>
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -339,10 +328,10 @@ claude plugin install locus@locus</code></pre>
     <h2>Removing Locus</h2>
     <div class="tabs" data-tabs>
       <div class="tabbar" role="tablist">
-        <button class="tabbtn" role="tab" aria-selected="true" data-tab="uai">Claude AI / Cowork</button>
-        <button class="tabbtn" role="tab" aria-selected="false" data-tab="ucli">Claude Code (CLI)</button>
+        <button class="tabbtn" role="tab" aria-selected="true" data-tab="uai" id="tab-uai" aria-controls="panel-uai">Claude AI / Cowork</button>
+        <button class="tabbtn" role="tab" aria-selected="false" data-tab="ucli" id="tab-ucli" aria-controls="panel-ucli">Claude Code (CLI)</button>
       </div>
-      <div class="tabpanel" data-panel="uai" data-active="true">
+      <div class="tabpanel" data-panel="uai" data-active="true" id="panel-uai" role="tabpanel" aria-labelledby="tab-uai" tabindex="0">
         <ol class="steps">
           <li><p>Open the <strong>Directory</strong>, then <strong>Plugins</strong>.</p></li>
           <li><p>Find <strong>Locus</strong> and remove or disable it.</p></li>
@@ -350,7 +339,7 @@ claude plugin install locus@locus</code></pre>
         </ol>
         <p class="hint">Your <code>Locus/</code> files and any App-mode browser state are yours, uninstalling the plugin does not touch them.</p>
       </div>
-      <div class="tabpanel" data-panel="ucli">
+      <div class="tabpanel" data-panel="ucli" id="panel-ucli" role="tabpanel" aria-labelledby="tab-ucli" tabindex="0">
         <pre><code>claude plugin uninstall locus
 claude plugin marketplace remove locus</code></pre>
       </div>
@@ -392,14 +381,39 @@ claude plugin marketplace remove locus</code></pre>
       });
     });
   });
-  // copy
-  document.querySelectorAll('.copybtn').forEach(function(btn){
+  // copy: from another element's text (.copybtn[data-copy]) or a literal string ([data-copy-text])
+  function legacyCopy(text){
+    return new Promise(function(resolve, reject){
+      try{
+        var ta = document.createElement('textarea');
+        ta.value = text; ta.setAttribute('readonly',''); ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.focus(); ta.select();
+        var ok = document.execCommand('copy'); document.body.removeChild(ta);
+        ok ? resolve() : reject();
+      }catch(e){ reject(e); }
+    });
+  }
+  function copyText(text){
+    if(navigator.clipboard && window.isSecureContext){
+      return navigator.clipboard.writeText(text).catch(function(){ return legacyCopy(text); });
+    }
+    return legacyCopy(text);
+  }
+  function wireCopy(btn, getText){
+    var orig = btn.textContent;
     btn.addEventListener('click', function(){
-      var el = document.querySelector(btn.getAttribute('data-copy'));
-      navigator.clipboard.writeText(el.textContent.trim()).then(function(){
-        var t = btn.textContent; btn.textContent = 'Copied'; setTimeout(function(){ btn.textContent = t; }, 1400);
+      copyText(getText()).then(function(){
+        btn.textContent = 'Copied'; setTimeout(function(){ btn.textContent = orig; }, 1400);
+      }).catch(function(){
+        btn.textContent = 'Copy failed'; setTimeout(function(){ btn.textContent = orig; }, 1400);
       });
     });
+  }
+  document.querySelectorAll('.copybtn[data-copy]').forEach(function(btn){
+    wireCopy(btn, function(){ return document.querySelector(btn.getAttribute('data-copy')).textContent.trim(); });
+  });
+  document.querySelectorAll('[data-copy-text]').forEach(function(btn){
+    wireCopy(btn, function(){ return btn.getAttribute('data-copy-text'); });
   });
 </script>
 </body>
