@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" role="img" aria-label="Locus mark">
+  <title>Locus mark (flat)</title>
+  <!-- Flat working mark: solid navy field. Use below 48px, where the graded field never appears. -->
+  <path d="M50 50 L83.05 18 A46 46 0 1 1 50 4 Z" fill="#000E21"/>
+  <circle cx="50" cy="50" r="8" fill="#BA3189"/>
+</svg>

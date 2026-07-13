@@ -1,0 +1,8 @@
+{
+  "name": "locus",
+  "owner": { "name": "Bogdan Brad" },
+  "metadata": { "description": "Locus, a private chief-of-staff workspace. Everything filed. Nothing forgotten." },
+  "plugins": [
+    { "name": "locus", "source": "./locus" }
+  ]
+}
