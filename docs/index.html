@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Locus — install guide</title>
+<meta name="description" content="Locus, a private chief-of-staff workspace. Install, use, and uninstall in Claude AI, Claude Cowork, and Claude Code.">
+<style>
+  :root{
+    --navy:#000E21; --navy-deep:#050D1A; --magenta:#BA3189; --magenta-deep:#80225F;
+    --cool-grey:#8A95A5; --mid-grey:#C5CDD9; --paper:#F7F8FA; --white:#FFFFFF; --ink-detail:#4A5566;
+    --font:'Neue Haas Grotesk Display','Helvetica Neue',Helvetica,Arial,sans-serif;
+    --mono:'SF Mono',ui-monospace,'JetBrains Mono',Menlo,Consolas,monospace;
+    --maxw:920px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--paper);color:var(--navy);font-family:var(--font);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+  a{color:var(--navy);text-decoration:none;border-bottom:1px solid var(--mid-grey);}
+  a:hover{border-color:var(--magenta);}
+  code{font-family:var(--mono);font-size:.86em;background:#eef0f4;border:1px solid var(--mid-grey);border-radius:3px;padding:1px 5px;}
+  h1,h2,h3{letter-spacing:-.01em;font-weight:700;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+
+  /* hero */
+  header.hero{background:var(--navy);color:var(--white);padding:64px 0 52px;}
+  .hero .wrap{display:flex;flex-direction:column;align-items:flex-start;}
+  .mark{width:64px;height:64px;display:block;margin-bottom:22px;}
+  .wordmark{font-weight:300;letter-spacing:.42em;font-size:30px;margin:0 0 4px;}
+  .tagline{color:var(--mid-grey);font-size:15px;margin:0 0 22px;}
+  .lede{font-size:20px;line-height:1.5;max-width:40ch;margin:0 0 26px;font-weight:400;}
+  .cta{display:flex;gap:12px;flex-wrap:wrap;}
+  .btn{display:inline-block;font-size:14px;font-weight:500;letter-spacing:.01em;border-radius:4px;padding:11px 18px;border:1px solid transparent;cursor:pointer;}
+  .btn-primary{background:var(--magenta);color:#fff;}
+  .btn-primary:hover{background:var(--magenta-deep);}
+  .btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.35);}
+  .btn-ghost:hover{border-color:#fff;}
+  a.btn{border-bottom:1px solid transparent;}
+
+  /* sections */
+  section{padding:52px 0;border-top:1px solid var(--mid-grey);}
+  section:first-of-type{border-top:none;}
+  .eyebrow{font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--cool-grey);margin:0 0 10px;}
+  h2{font-size:27px;margin:0 0 8px;}
+  h3{font-size:18px;margin:26px 0 8px;}
+  p{margin:0 0 14px;}
+  .sub{color:var(--ink-detail);max-width:62ch;}
+
+  /* cards / grid */
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px;}
+  @media(max-width:680px){.grid{grid-template-columns:1fr;}}
+  .card{background:#fff;border:1px solid var(--mid-grey);border-radius:4px;padding:20px 22px;}
+  .card h3{margin-top:0;}
+  .card p{font-size:14.5px;color:var(--ink-detail);margin-bottom:0;}
+
+  /* skills table */
+  table{width:100%;border-collapse:collapse;margin-top:20px;font-size:14.5px;}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--mid-grey);vertical-align:top;}
+  th{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--cool-grey);font-weight:600;}
+  td code{white-space:nowrap;}
+  .chip{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.1em;border:1px solid var(--navy);border-radius:2px;padding:2px 6px;color:var(--navy);}
+  .chip.ri{border-color:var(--magenta);color:var(--magenta);}
+
+  /* tabs */
+  .tabs{margin-top:24px;}
+  .tabbar{display:flex;gap:6px;flex-wrap:wrap;border-bottom:1px solid var(--mid-grey);}
+  .tabbtn{appearance:none;background:transparent;border:none;font-family:var(--font);font-size:14px;font-weight:500;color:var(--cool-grey);padding:10px 14px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;}
+  .tabbtn[aria-selected="true"]{color:var(--navy);border-bottom-color:var(--magenta);}
+  .tabpanel{display:none;padding-top:22px;}
+  .tabpanel[data-active="true"]{display:block;}
+  ol.steps{margin:0;padding-left:0;list-style:none;counter-reset:s;}
+  ol.steps li{position:relative;padding:0 0 16px 42px;counter-increment:s;}
+  ol.steps li::before{content:counter(s,decimal-leading-zero);position:absolute;left:0;top:0;font-family:var(--mono);font-size:12px;color:var(--magenta);border:1px solid var(--mid-grey);border-radius:3px;width:28px;height:24px;display:flex;align-items:center;justify-content:center;background:#fff;}
+  ol.steps li p{margin:0;font-size:15px;}
+  ol.steps li .hint{font-size:13px;color:var(--cool-grey);margin-top:3px;}
+  pre{background:var(--navy);color:#e9edf3;border-radius:5px;padding:15px 17px;overflow-x:auto;font-family:var(--mono);font-size:13px;line-height:1.6;margin:12px 0;}
+  pre code{background:none;border:none;padding:0;color:inherit;font-size:inherit;}
+  .note{background:#fff;border:1px solid var(--mid-grey);border-left:3px solid var(--magenta);border-radius:3px;padding:13px 16px;font-size:14px;color:var(--ink-detail);margin:16px 0;}
+  .note strong{color:var(--navy);}
+  .avail{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:500;margin-top:6px;}
+  .dot{width:8px;height:8px;border-radius:50%;display:inline-block;}
+  .dot.ok{background:#2e7d5b;} .dot.no{background:var(--magenta);}
+
+  /* repo url block */
+  .repo{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--mid-grey);border-radius:5px;padding:12px 14px;margin:8px 0 4px;flex-wrap:wrap;}
+  .repo code{font-size:14px;background:none;border:none;padding:0;flex:1;min-width:220px;word-break:break-all;}
+  .copybtn{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--magenta);background:none;border:1px solid var(--mid-grey);border-radius:3px;padding:6px 11px;cursor:pointer;font-family:var(--font);}
+  .copybtn:hover{border-color:var(--magenta);}
+
+  /* downloads */
+  .dl{display:flex;align-items:flex-start;gap:16px;background:#fff;border:1px solid var(--mid-grey);border-radius:4px;padding:18px 20px;}
+  .dl .icon{width:40px;height:40px;flex-shrink:0;border:1px solid var(--mid-grey);border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:var(--cool-grey);}
+  .dl h3{margin:0 0 3px;font-size:16px;}
+  .dl p{margin:0 0 10px;font-size:13.5px;color:var(--ink-detail);}
+
+  /* preview */
+  .preview{margin-top:22px;border:1px solid var(--mid-grey);border-radius:6px;overflow:hidden;background:#fff;}
+  .pv-head{background:var(--navy);color:#fff;padding:22px 24px;}
+  .pv-brand{font-weight:300;letter-spacing:.42em;font-size:16px;margin:8px 0 0;}
+  .pv-kicker{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--cool-grey);margin-top:12px;}
+  .pv-stamp{display:inline-block;margin-top:10px;font-size:9px;letter-spacing:.22em;text-transform:uppercase;border:1px solid rgba(255,255,255,.35);border-radius:3px;padding:3px 10px;}
+  .pv-body{padding:20px 24px;}
+  .pv-summary{background:#fff;border:1px solid var(--mid-grey);border-radius:3px;padding:12px 15px;font-size:15px;font-weight:500;}
+  .pv-sec{font-size:10px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--cool-grey);margin:18px 0 9px;}
+  .pv-sec.risk{color:var(--magenta);}
+  .pv-item{border:1px solid var(--mid-grey);border-radius:3px;padding:10px 13px;margin-bottom:8px;display:flex;align-items:center;gap:9px;font-size:14px;}
+
+  footer{background:var(--navy);color:var(--cool-grey);font-size:13px;padding:34px 0;}
+  footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+  footer a{color:var(--mid-grey);border-bottom-color:rgba(255,255,255,.25);}
+
+  /* toc / quick nav */
+  nav.quick{position:sticky;top:0;background:rgba(247,248,250,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--mid-grey);z-index:10;}
+  nav.quick .wrap{display:flex;gap:18px;overflow-x:auto;padding:12px 24px;font-size:13px;}
+  nav.quick a{border:none;color:var(--cool-grey);white-space:nowrap;font-weight:500;}
+  nav.quick a:hover{color:var(--navy);}
+
+  @media (prefers-color-scheme: dark){
+    body{background:#0a1220;color:#e9edf3;}
+    section{border-color:#1e2a3d;}
+    .card,.dl,.repo,.note,.preview,.pv-summary,.pv-item{background:#0f1a2c;border-color:#26344a;color:#e9edf3;}
+    .card p,.dl p,.note,.sub,td{color:#aeb9ca;}
+    code{background:#16233a;border-color:#26344a;color:#e9edf3;}
+    th,td{border-color:#1e2a3d;}
+    nav.quick{background:rgba(10,18,32,.92);border-color:#1e2a3d;}
+    a{color:#e9edf3;border-color:#33425b;}
+    .chip{color:#cdd6e4;border-color:#33425b;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <svg class="mark" viewBox="0 0 100 100" role="img" aria-label="Locus mark">
+      <defs><radialGradient id="lf" cx="50%" cy="50%" r="62%">
+        <stop offset="0%" stop-color="#010A18"/><stop offset="38%" stop-color="#04101F"/>
+        <stop offset="72%" stop-color="#45506A" stop-opacity="0.55"/><stop offset="100%" stop-color="#C5CDD9" stop-opacity="0"/>
+      </radialGradient></defs>
+      <path d="M50 50 L83.05 18 A46 46 0 1 1 50 4 Z" fill="url(#lf)"/>
+      <circle cx="50" cy="50" r="8" fill="#BA3189"/>
+    </svg>
+    <p class="wordmark">L O C U S</p>
+    <p class="tagline">Everything filed. Nothing forgotten.</p>
+    <p class="lede">A private chief-of-staff workspace. It turns loose notes into a governed portfolio, every item typed, filed under an engagement, and kept.</p>
+    <div class="cta">
+      <a class="btn btn-primary" href="#install">Install</a>
+      <a class="btn btn-ghost" href="#downloads">Download artifacts</a>
+    </div>
+  </div>
+</header>
+
+<nav class="quick">
+  <div class="wrap">
+    <a href="#what">What it is</a>
+    <a href="#install">Install</a>
+    <a href="#setup">Set up</a>
+    <a href="#use">Use it</a>
+    <a href="#app">App mode</a>
+    <a href="#downloads">Downloads</a>
+    <a href="#uninstall">Uninstall</a>
+    <a href="#know">Good to know</a>
+  </div>
+</nav>
+
+<main>
+
+<section id="what">
+  <div class="wrap">
+    <p class="eyebrow">What it is</p>
+    <h2>Two modes, one workspace</h2>
+    <p class="sub">Locus runs the same taxonomy two ways. Pick one as your system of record, they do not sync.</p>
+    <div class="grid">
+      <div class="card">
+        <h3>App mode</h3>
+        <p>A passphrase-locked board rendered as an artifact in Claude AI. Paste notes, triage into a portfolio, read an in-app briefing, weekly status, and pill. State lives per user in your browser.</p>
+      </div>
+      <div class="card">
+        <h3>Desk mode</h3>
+        <p>File-based Locus. Your dossiers are plain markdown under a <code>Locus/</code> folder; the skills read and write them. No artifact runtime needed, so it works everywhere, including Claude Cowork.</p>
+      </div>
+    </div>
+    <h3>The five skills</h3>
+    <table>
+      <thead><tr><th>Skill</th><th>Say</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td><code>locus</code></td><td>set up locus / open locus</td><td>Front door. First-run setup, then opens App mode.</td></tr>
+        <tr><td><code>locus-triage</code></td><td>triage these notes</td><td>Splits raw notes into typed records, routes each to an engagement, files it.</td></tr>
+        <tr><td><code>locus-briefing</code></td><td>brief me</td><td>Reads the dossiers and writes the daily briefing.</td></tr>
+        <tr><td><code>locus-status</code></td><td>weekly status</td><td>Compiles a weekly status report over a chosen window.</td></tr>
+        <tr><td><code>locus-pill</code></td><td>locus pill</td><td>One idea from a 31-source canon, aimed at a live engagement. Runs only when enabled.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="install">
+  <div class="wrap">
+    <p class="eyebrow">Install</p>
+    <h2>Add the Locus plugin</h2>
+    <p class="sub">Locus installs from a plugin marketplace repository. Point your Claude environment at the repo below, then install the Locus card.</p>
+    <div class="repo">
+      <code id="repo-url">https://github.com/bradbogdan/locus-plugin</code>
+      <button class="copybtn" data-copy="#repo-url">Copy</button>
+    </div>
+
+    <div class="tabs" data-tabs>
+      <div class="tabbar" role="tablist">
+        <button class="tabbtn" role="tab" aria-selected="true" data-tab="ai">Claude AI</button>
+        <button class="tabbtn" role="tab" aria-selected="false" data-tab="cowork">Claude Cowork</button>
+        <button class="tabbtn" role="tab" aria-selected="false" data-tab="cli">Claude Code (CLI)</button>
+      </div>
+
+      <div class="tabpanel" data-panel="ai" data-active="true">
+        <ol class="steps">
+          <li><p>Open the <strong>Directory</strong>, then the <strong>Plugins</strong> tab.</p></li>
+          <li><p>Click <strong>+</strong> (top right) and choose <strong>Add from a repository</strong>.</p></li>
+          <li><p>Paste the repo URL above and confirm. The marketplace syncs.</p><p class="hint">Private repo: if prompted, connect the GitHub account that has access.</p></li>
+          <li><p>Find the <strong>Locus</strong> card in your Directory and click <strong>+</strong> to install. Restart the session if asked.</p></li>
+        </ol>
+        <span class="avail"><span class="dot ok"></span> App mode available here (Claude AI renders the React artifact).</span>
+      </div>
+
+      <div class="tabpanel" data-panel="cowork">
+        <ol class="steps">
+          <li><p>Open the <strong>Directory</strong>, then the <strong>Plugins</strong> tab.</p></li>
+          <li><p>Click <strong>+</strong> (top right) and choose <strong>Add from a repository</strong>.</p></li>
+          <li><p>Paste the repo URL above and confirm. The marketplace syncs.</p></li>
+          <li><p>Install the <strong>Locus</strong> card with <strong>+</strong>. The five skills register.</p></li>
+        </ol>
+        <span class="avail"><span class="dot no"></span> Desk mode only. Cowork's artifact pane serves self-contained HTML, so App mode does not run here, use the file-based skills.</span>
+      </div>
+
+      <div class="tabpanel" data-panel="cli">
+        <p>From a terminal with the <code>claude</code> CLI:</p>
+        <pre><code>claude plugin marketplace add bradbogdan/locus-plugin
+claude plugin install locus@locus</code></pre>
+        <p class="hint">Restart the session, then confirm it loaded:</p>
+        <pre><code>claude plugin details locus   # should list 5 skills</code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="setup">
+  <div class="wrap">
+    <p class="eyebrow">Set up</p>
+    <h2>First run</h2>
+    <p class="sub">Setup is a precondition, nothing runs until it is done. Say <code>set up locus</code>. You answer two questions and it builds the workspace.</p>
+    <div class="grid">
+      <div class="card">
+        <h3>1. Your role</h3>
+        <p>Which senior seat Locus serves, for example "the COO of a regional group". Taken verbatim, it personalises every prompt. Free text, not a menu.</p>
+      </div>
+      <div class="card">
+        <h3>2. The daily pill</h3>
+        <p>On or off (default off). When on, one idea from the canon each day, capped at 150 words, aimed at a live engagement.</p>
+      </div>
+    </div>
+    <p style="margin-top:20px">It then writes <code>Locus/config.md</code> and seeds five empty engagement dossiers. Name them and give each a one-line scope before your first triage, routing quality depends on it.</p>
+  </div>
+</section>
+
+<section id="use">
+  <div class="wrap">
+    <p class="eyebrow">Use it</p>
+    <h2>Day to day</h2>
+    <div class="grid">
+      <div class="card"><h3>Triage</h3><p>Paste raw notes. Locus splits them into typed items, routes each by scope, flags duplicates, and links completions. It shows a proposal table and waits, nothing is filed until you confirm.</p></div>
+      <div class="card"><h3>Briefing</h3><p>Say <code>brief me</code>. Leads with the single most consequential development, named by project, plus today, priorities, deadlines, risks, and one honest nudge.</p></div>
+      <div class="card"><h3>Weekly status</h3><p>Say <code>weekly status</code>. One terse paragraph per engagement over your chosen window, completed and in-progress, as a branded report.</p></div>
+      <div class="card"><h3>Pill</h3><p>Say <code>locus pill</code>. One durable idea, why it matters in two sentences, and a question put to a live engagement. Cached per day.</p></div>
+    </div>
+
+    <h3>The look</h3>
+    <p class="sub">Every briefing, status, and pill comes out in the Locus dress, navy header, magenta only where a decision needs deciding.</p>
+    <div class="preview" aria-label="Sample daily briefing">
+      <div class="pv-head">
+        <svg width="34" height="34" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 50 L83.05 18 A46 46 0 1 1 50 4 Z" fill="#0a1526"/><circle cx="50" cy="50" r="8" fill="#BA3189"/></svg>
+        <p class="pv-brand">L O C U S</p>
+        <p class="pv-kicker">Daily Briefing</p>
+        <span class="pv-stamp">Internal — eyes only</span>
+      </div>
+      <div class="pv-body">
+        <div class="pv-summary">Meridian: the distribution partner is now demanding exclusivity, forcing a channel decision before launch.</div>
+        <p class="pv-sec">Top priorities</p>
+        <div class="pv-item"><span class="chip">01</span> Decide the exclusivity ask before it hardens</div>
+        <div class="pv-item"><span class="chip">02</span> Hold the cutover go / no-go on 31 July</div>
+        <p class="pv-sec risk">Open risks</p>
+        <div class="pv-item"><span class="chip ri">RI</span> Exclusivity could close the other launch channels</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="app">
+  <div class="wrap">
+    <p class="eyebrow">App mode</p>
+    <h2>Opening the board</h2>
+    <p class="sub">In Claude AI, say <code>open locus</code>, the plugin renders the bundled app as a React artifact using your configured role. Or paste the app yourself from the download below.</p>
+    <div class="note">
+      <strong>Runtime.</strong> App mode needs the Claude AI React artifact runtime (<code>window.storage</code> for state, an LLM route for the four intelligence sites). If the intelligence sites report <code>no AI route reachable</code>, your artifact environment does not expose an LLM route, use Desk mode instead. Claude Cowork's HTML-only pane cannot run App mode at all.
+    </div>
+    <div class="note">
+      <strong>Pasting it yourself.</strong> Download <code>locus-app.tsx</code>, replace the four <code>{{PRINCIPAL_ROLE}}</code> tokens with your role (for example "the CTO of a tech group"), and publish it as a React artifact.
+    </div>
+  </div>
+</section>
+
+<section id="downloads">
+  <div class="wrap">
+    <p class="eyebrow">Downloads</p>
+    <h2>Artifacts</h2>
+    <p class="sub">You do not need these to install the plugin, the marketplace carries everything. They are here for App mode and offline reference.</p>
+    <div class="grid">
+      <div class="dl">
+        <div class="icon">TSX</div>
+        <div>
+          <h3>locus-app.tsx</h3>
+          <p>The App-mode source. Paste into Claude AI as a React artifact (replace the role token). 1,498 lines, React only.</p>
+          <a class="btn btn-primary" href="./downloads/locus-app.tsx" download>Download</a>
+        </div>
+      </div>
+      <div class="dl">
+        <div class="icon">ZIP</div>
+        <div>
+          <h3>locus.plugin</h3>
+          <p>The packaged plugin (the five skills, references, and assets). For reference or an offline copy.</p>
+          <a class="btn btn-primary" href="./downloads/locus.plugin" download>Download</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="uninstall">
+  <div class="wrap">
+    <p class="eyebrow">Uninstall</p>
+    <h2>Removing Locus</h2>
+    <div class="tabs" data-tabs>
+      <div class="tabbar" role="tablist">
+        <button class="tabbtn" role="tab" aria-selected="true" data-tab="uai">Claude AI / Cowork</button>
+        <button class="tabbtn" role="tab" aria-selected="false" data-tab="ucli">Claude Code (CLI)</button>
+      </div>
+      <div class="tabpanel" data-panel="uai" data-active="true">
+        <ol class="steps">
+          <li><p>Open the <strong>Directory</strong>, then <strong>Plugins</strong>.</p></li>
+          <li><p>Find <strong>Locus</strong> and remove or disable it.</p></li>
+          <li><p>To fully detach, remove the <strong>locus</strong> marketplace from your sources as well.</p></li>
+        </ol>
+        <p class="hint">Your <code>Locus/</code> files and any App-mode browser state are yours, uninstalling the plugin does not touch them.</p>
+      </div>
+      <div class="tabpanel" data-panel="ucli">
+        <pre><code>claude plugin uninstall locus
+claude plugin marketplace remove locus</code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="know">
+  <div class="wrap">
+    <p class="eyebrow">Good to know</p>
+    <h2>Before you rely on it</h2>
+    <div class="grid">
+      <div class="card"><h3>App and Desk do not sync</h3><p>They start from the same empty state and diverge. Choose one as the system of record before you put real data anywhere.</p></div>
+      <div class="card"><h3>The AI route is environment-dependent</h3><p>App-mode intelligence needs an LLM route in the artifact runtime. Verify the briefing returns content before you depend on it.</p></div>
+      <div class="card"><h3>Attachments are device-local</h3><p>App-mode attachments live in your browser (IndexedDB). They are not in the markdown and not in a backup of <code>Locus/</code>.</p></div>
+      <div class="card"><h3>Keep your Desk files</h3><p>Where the working folder resets between sessions (some Claude AI containers), download the <code>Locus/</code> tree at the end and re-upload next time.</p></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Locus, a private chief-of-staff workspace. A Majoritas product.</span>
+    <span><a href="https://github.com/bradbogdan/locus-plugin">github.com/bradbogdan/locus-plugin</a></span>
+  </div>
+</footer>
+
+<script>
+  // tabs
+  document.querySelectorAll('[data-tabs]').forEach(function(group){
+    var btns = group.querySelectorAll('.tabbtn');
+    var panels = group.querySelectorAll('.tabpanel');
+    btns.forEach(function(btn){
+      btn.addEventListener('click', function(){
+        btns.forEach(function(b){ b.setAttribute('aria-selected', b===btn ? 'true':'false'); });
+        panels.forEach(function(p){ p.setAttribute('data-active', p.getAttribute('data-panel')===btn.getAttribute('data-tab') ? 'true':'false'); });
+      });
+    });
+  });
+  // copy
+  document.querySelectorAll('.copybtn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var el = document.querySelector(btn.getAttribute('data-copy'));
+      navigator.clipboard.writeText(el.textContent.trim()).then(function(){
+        var t = btn.textContent; btn.textContent = 'Copied'; setTimeout(function(){ btn.textContent = t; }, 1400);
+      });
+    });
+  });
+</script>
+</body>
+</html>
