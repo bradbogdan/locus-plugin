@@ -1,6 +1,6 @@
 ---
 name: locus-status
-description: Compiles a LOCUS-branded internal weekly status report from the desk-mode dossiers over a chosen window. Use when the principal asks for a "weekly status", "status report", "weekly review", "LOCUS status", "compile a status report", or "what got done and what is open" across recent days. Asks for the window (last 7, 14, or 30 days, or since a given date) and an optional dossier subset, selects items filed or completed inside the window, writes ONE terse status paragraph per project, and produces a self-contained HTML report at Locus/reports/LOCUS-weekly-status-<today>.html.
+description: Compiles a LOCUS-branded internal weekly status report from the desk-mode dossiers over a chosen window. Use when the principal asks for a "weekly status", "status report", "weekly review", "LOCUS status", "compile a status report", or "what got done and what is open" across recent days. Asks for the window (last 7, 14, or 30 days, or since a given date) and an optional dossier subset, selects items filed or completed inside the window, writes ONE terse status paragraph per project, and produces a self-contained HTML report at Locus/reports/LOCUS-weekly-status-(today).html.
 ---
 
 # Locus weekly status report
